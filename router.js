@@ -1,18 +1,18 @@
- // Função para carregar o conteúdo do nav.html
+function renderComponent(path, id) {
+  fetch(path)
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById(`${id}-placeholder`).innerHTML = data;
+  })
+  .catch(error => console.error(`Erro ao carregar o ${id}:`, error));
+}
+
+// Função para carregar o conteúdo do component.html
  switch(window.location.pathname) {
   case "/":
-    fetch('./src/components/main.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('main-placeholder').innerHTML = data;
-    })
-    .catch(error => console.error('Erro ao carregar o main:', error));
+    renderComponent('./src/components/main.html', 'main');
     break;
   default:
-    fetch('./src/components/main.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('main-placeholder').innerHTML = data;
-    })
-    .catch(error => console.error('Erro ao carregar o main:', error));
+    renderComponent('./src/components/main.html', 'main');
+    break;
  }
