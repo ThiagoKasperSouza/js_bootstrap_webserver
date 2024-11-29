@@ -20,6 +20,18 @@ const mimeTypes = {
     '.wasm': 'application/wasm'
 };
 
+function renderComponent(path) {
+    fetch(path)
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById(`main-placeholder`).innerHTML = data;
+    })
+    .catch(error => console.error(`Erro ao carregar o main:`, error));
+  }
+  
+
+  
+
 const server = http.createServer((req, res) => {
     let filePath = '.' + req.url;
     switch(filePath) {
@@ -34,11 +46,11 @@ const server = http.createServer((req, res) => {
     fs.readFile(filePath, (error, content) => {
         if (error) {
             if (error.code == 'ENOENT') {
-                res.writeHead(404);
-                res.end('404 Not Found');
+                res.writeHead(404, {'Content-Type': 'text/html'});
+                res.end(`<h1>Erro ao carregar a pagina</h1><p>${error.message}</p>`, 'utf-8');
             } else {
-                res.writeHead(500);
-                res.end('500 Internal Server Error');
+                res.writeHead(500,{'Content-Type': 'text/html'});
+                res.end(`<h1>Erro ao carregar a pagina</h1><p>${error.message}</p>`, 'utf-8');
             }
         } else {
             res.writeHead(200, { 'Content-Type': contentType });
