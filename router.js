@@ -20,6 +20,7 @@ async function render() {
         mainPlaceholder.innerHTML = await loadContent('./src/components/main.html');
         break;
       case '/teste1':
+        console.log("VEIO TESTE1");
         mainPlaceholder.innerHTML = await loadContent('./src/components/teste1.html');
         break;
       default:
@@ -42,7 +43,7 @@ async function navigate(event) {
 
 // Adiciona ouvintes de eventos aos links
 document.addEventListener('DOMContentLoaded', () => {
-  const links = document.querySelectorAll('.top-nav a');
+  const links = document.querySelectorAll('.nav-link');
   links.forEach(link => {
     link.addEventListener('click', navigate);
   });

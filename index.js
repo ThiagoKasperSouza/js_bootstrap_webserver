@@ -19,17 +19,6 @@ const mimeTypes = {
     '.otf': 'application/font-otf',
     '.wasm': 'application/wasm'
 };
-
-function renderComponent(path) {
-    fetch(path)
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById(`main-placeholder`).innerHTML = data;
-    })
-    .catch(error => console.error(`Erro ao carregar o main:`, error));
-  }
-  
-
   
 
 const server = http.createServer((req, res) => {
