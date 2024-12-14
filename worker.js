@@ -1,22 +1,15 @@
-// worker.js
+importScripts('https://unpkg.com/mqtt/dist/mqtt.min.js');
+
 
 self.onmessage = function(event) {
-    var client = mqtt.connect('ws://broker.mqttdashboard.com:8000/mqtt')
-    client.subscribe("mqtt/test")
+    const client = mqtt.connect('ws://broker.hivemq.com:8000/mqtt'); // Substitua pelo seu broker
 
-    client.on("message", function (topic, payload) {
-      console.log([topic, payload].join(": "))
-        client.end()
-    })
+    client.publish("mqtt/exemplo", "hello world!");
 
-    
-
-    for (let i = 0; true; i++) {
-        client.publish("mqtt/test", "hello world!")
-    }
-
-    // Envie o resultado de volta para o thread principal
-
-    self.postMessage(result);
-
+    setInterval(async ()=> {
+        const res = await fetch('https://economia.awesomeapi.com.br/last/ETH-BRL');
+        const message= await res.json();
+        postMessage(message);
+    }, 60000);
+   
 };

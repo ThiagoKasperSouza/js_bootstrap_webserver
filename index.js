@@ -19,7 +19,26 @@ const mimeTypes = {
     '.otf': 'application/font-otf',
     '.wasm': 'application/wasm'
 };
-  
+
+
+function loadEnv() {
+
+    const envFile = fs.readFileSync('.env', 'utf-8');
+    const envLines = envFile.split('\n');
+    const envVariables = {};
+    envLines.forEach(line => {
+        // Ignora linhas vazias e comentários
+        if (line && !line.startsWith('#')) {
+            const [key, value] = line.split('=');
+            envVariables[key.trim()] = value.trim();
+        }
+
+    });
+    return envVariables;
+}
+
+const env = loadEnv();
+
 
 const server = http.createServer((req, res) => {
     let filePath = '.' + req.url;
@@ -48,6 +67,6 @@ const server = http.createServer((req, res) => {
     });
 });
 
-server.listen(PORT, () => {
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
+server.listen(env.PORT, () => {
+    console.log(`Servidor rodando em http://localhost:${env.PORT}`);
 });

@@ -13,14 +13,12 @@ async function loadContent(url) {
 async function render() {
   const mainPlaceholder = document.getElementById('main-placeholder');
   const path = window.location.pathname;
-  console.log("path", path);
   try {
     switch (path) {
       case '/':
         mainPlaceholder.innerHTML = await loadContent('./src/components/main.html');
         break;
       case '/teste1':
-        console.log("VEIO TESTE1");
         mainPlaceholder.innerHTML = await loadContent('./src/components/teste1.html');
         break;
       default:
