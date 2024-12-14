@@ -1,7 +1,6 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const PORT = 3000;
 const mimeTypes = {
     '.html': 'text/html',
     '.js': 'text/javascript',
@@ -55,10 +54,10 @@ const server = http.createServer((req, res) => {
         if (error) {
             if (error.code == 'ENOENT') {
                 res.writeHead(404, {'Content-Type': 'text/html'});
-                res.end(`<h1>Erro ao carregar a pagina</h1><p>${error.message}</p>`, 'utf-8');
+                res.end(`<h1>Erro ao carregar a pagina</h1><p>${error.message}</p><br><a href="/">voltar</a>`, 'utf-8');
             } else {
                 res.writeHead(500,{'Content-Type': 'text/html'});
-                res.end(`<h1>Erro ao carregar a pagina</h1><p>${error.message}</p>`, 'utf-8');
+                res.end(`<h1>Erro ao carregar a pagina</h1><p>${error.message}</p><br><a href="/">voltar</a>`, 'utf-8');
             }
         } else {
             res.writeHead(200, { 'Content-Type': contentType });
