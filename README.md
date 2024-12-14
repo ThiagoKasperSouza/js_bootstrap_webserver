@@ -1,6 +1,6 @@
-## Node Simple Webserver
+## Node.js Bootstrap Webserver
 
-simple webserver without external deps
+My version of a webserver without too many dependencies
 
 To install requirements:
 npm i
